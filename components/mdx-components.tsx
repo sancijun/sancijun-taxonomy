@@ -96,8 +96,13 @@ const components = {
     alt,
     ...props
   }: React.ImgHTMLAttributes<HTMLImageElement>) => (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img className={cn("rounded-md border", className)} alt={alt} {...props} />
+    <Image
+      className={cn("rounded-md border", className)}
+      alt={alt}
+      width={720}
+      height={405}
+      {...props}
+    />
   ),
   hr: ({ ...props }) => <hr className="my-4 md:my-8" {...props} />,
   table: ({ className, ...props }: React.HTMLAttributes<HTMLTableElement>) => (
@@ -147,7 +152,14 @@ const components = {
       {...props}
     />
   ),
-  Image,
+  Image: (props) => (
+    <Image
+      alt={props.alt}
+      width={720}
+      height={405}
+      {...props}
+    />
+  ),
   Callout,
   Card: MdxCard,
 }

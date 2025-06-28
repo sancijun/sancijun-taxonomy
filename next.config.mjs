@@ -10,7 +10,7 @@ const nextConfig = {
   },
   experimental: {
     appDir: true,
-    serverComponentsExternalPackages: ["@prisma/client"],
+    serverComponentsExternalPackages: ["@prisma/client", "@prisma/adapter-d1", "ky"],
   },
 }
 

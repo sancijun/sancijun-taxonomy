@@ -1,0 +1,10 @@
+name = "sancijun-website"
+compatibility_date = "2025-06-28" # It's a good practice to set a recent date
+
+# These bindings are used by your application to interact with Cloudflare services.
+# You will need to fill in the database_id after you create the D1 database.
+[[d1_databases]]
+binding = "DB" # This binding name MUST match the one used in `lib/db.ts` (process.env.DB)
+database_name = "sancijun-db"
+database_id = "360d88bf-5efb-4aab-8596-f5fb32cfa45a" # TODO: Fill this in after creating the D1 database.
+migrations_dir = "prisma/migrations" # Point to the correct migrations directory 

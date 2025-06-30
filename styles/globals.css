@@ -1,81 +1,108 @@
+/* 这些是 Tailwind CSS 的指令，它们告诉 Tailwind 在构建时将哪些"层"的样式注入到最终的 CSS 文件中。 */
+/* @tailwind base;     => 注入 Tailwind 的基础样式（如重置浏览器默认样式的 Preflight）。 */
+/* @tailwind components; => 注入 Tailwind 的组件类（如 .container）。 */
+/* @tailwind utilities;  => 注入 Tailwind 的功能类（如 .text-red-500, .bg-blue-500）。 */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* `@layer base` 用于定义基础层级的样式。在这里定义的样式可以被 Tailwind 的功能类覆盖。 */
+/* 这是定义所有设计系统变量（Design Tokens）的核心区域。 */
 @layer base {
+  /* `:root` 选择器定义了全局 CSS 变量，这些变量默认应用于亮色主题（Light Mode）。 */
+  /* 颜色值使用 HSL (Hue, Saturation, Lightness) 格式，不带 "hsl()" 函数， */
+  /* 这样在 tailwind.config.js 中可以直接通过 `hsl(var(--variable))` 的方式使用。 */
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 47.4% 11.2%;
+    /* --background: 页面主要背景色 */
+    --background: 0 0% 100%; /* white */
+    /* --foreground: 页面主要文字颜色 */
+    --foreground: 222.2 47.4% 11.2%; /* near-black */
 
+    /* --muted: 用于柔和、次要内容的背景色 */
     --muted: 210 40% 96.1%;
+    /* --muted-foreground: 用于柔和、次要内容的文字颜色 */
     --muted-foreground: 215.4 16.3% 46.9%;
 
+    /* --popover: 弹出层（如菜单、对话框）的背景色 */
     --popover: 0 0% 100%;
+    /* --popover-foreground: 弹出层的文字颜色 */
     --popover-foreground: 222.2 47.4% 11.2%;
 
+    /* --border: 组件的边框颜色 */
     --border: 214.3 31.8% 91.4%;
+    /* --input: 输入框的边框颜色 */
     --input: 214.3 31.8% 91.4%;
 
+    /* --card: 卡片组件的背景色 */
     --card: 0 0% 100%;
+    /* --card-foreground: 卡片组件的文字颜色 */
     --card-foreground: 222.2 47.4% 11.2%;
 
+    /* --primary: 主要交互颜色，用于按钮、链接等最重要的元素 */
     --primary: 222.2 47.4% 11.2%;
+    /* --primary-foreground: 在 `primary` 背景色上显示的文字颜色，确保对比度 */
     --primary-foreground: 210 40% 98%;
 
+    /* --secondary: 次要交互颜色，用于次级按钮等 */
     --secondary: 210 40% 96.1%;
+    /* --secondary-foreground: 在 `secondary` 背景色上显示的文字颜色 */
     --secondary-foreground: 222.2 47.4% 11.2%;
 
+    /* --accent: 强调色，通常用于鼠标悬停（hover）等交互状态 */
     --accent: 210 40% 96.1%;
+    /* --accent-foreground: 在 `accent` 背景色上显示的文字颜色 */
     --accent-foreground: 222.2 47.4% 11.2%;
 
+    /* --destructive: 警示/破坏性操作的颜色，如删除按钮 */
     --destructive: 0 100% 50%;
+    /* --destructive-foreground: 在 `destructive` 背景色上显示的文字颜色 */
     --destructive-foreground: 210 40% 98%;
 
+    /* --ring: 用于键盘导航时的焦点外框（focus ring）颜色，确保可访问性 */
     --ring: 215 20.2% 65.1%;
 
-    --radius: 0.5rem;
+    /* --radius: 全局基础圆角大小。在 tailwind.config.js 中会基于此变量派生出 lg, md, sm 等具体值。 */
+    --radius: 0.5rem; /* 8px */
   }
 
+  /* 当 `<html>` 标签上存在 `.dark` 类时，这里的变量会覆盖 `:root` 中的同名变量。 */
+  /* 这就是实现暗色主题（Dark Mode）的核心机制。 */
   .dark {
     --background: 224 71% 4%;
     --foreground: 213 31% 91%;
-
     --muted: 223 47% 11%;
     --muted-foreground: 215.4 16.3% 56.9%;
-
     --accent: 216 34% 17%;
     --accent-foreground: 210 40% 98%;
-
     --popover: 224 71% 4%;
     --popover-foreground: 215 20.2% 65.1%;
-
     --border: 216 34% 17%;
     --input: 216 34% 17%;
-
     --card: 224 71% 4%;
     --card-foreground: 213 31% 91%;
-
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 1.2%;
-
     --secondary: 222.2 47.4% 11.2%;
     --secondary-foreground: 210 40% 98%;
-
     --destructive: 0 63% 31%;
     --destructive-foreground: 210 40% 98%;
-
     --ring: 216 34% 17%;
-
     --radius: 0.5rem;
   }
 }
 
+/* 再次使用 `@layer base` 来定义一些全局的基础样式。 */
 @layer base {
+  /* `*` 是通用选择器，表示为所有元素应用默认边框颜色。 */
+  /* `@apply` 是 Tailwind 的一个特性，允许你在 CSS 中使用 Tailwind 的功能类。 */
+  /* 这里相当于 `border-color: hsl(var(--border));` */
   * {
     @apply border-border;
   }
+  /* 为 `<body>` 标签应用全局的背景和文字颜色。 */
   body {
     @apply bg-background text-foreground;
+    /* 启用字体连字特性，提升排版美观度。 */
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }

@@ -1,0 +1,6 @@
+---
+description: 
+globs: *.tsx
+alwaysApply: false
+---
+UI/UX 设计风格要统一，可以参考 [tailwind.config.js](mdc:tailwind.config.js) [globals.css](mdc:styles/globals.css)
